@@ -4,7 +4,7 @@ pkgs_to_install="make git zsh xclip"
 sudo apt install -y $pkgs_to_install
 
 echo "Copiando .vimrc"
-cp ./res $HOME/.vimrc
+cp ./resources/.vimrc $HOME/.vimrc
 
 # Una funcion para modificar algun valor de los ficheros de configuracion por un nuevo valor.
 # Si no esta el valor, se anade.
