@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pkgs_to_install="make git zsh xclip"
+pkgs_to_install="make git zsh xclip fzf"
 sudo apt install -y $pkgs_to_install
 
 echo "Copiando .vimrc"
@@ -35,6 +35,8 @@ else
 fi
 
 ensure_line "ZSH_THEME=\"robbyrussell\"" "ZSH_THEME=\"josh\"" "$HOME/.zshrc"
+ensure_line "^plugins" "plugins=(git fzf)" "$HOME/.zshrc"
+source $HOME/.zshrc
 
 # Oh-my-tmux
 if [[ ! -f $HOME/.tmux.conf.local ]]; then
@@ -51,3 +53,5 @@ else
 fi
 
 ensure_line "tmux_conf_copy_to_os_clipboard=false " "tmux_conf_copy_to_os_clipboard=true " "$HOME/.tmux.conf.local"
+ensure_line "mode-keys vi" "set -g mode-keys vi" "$HOME/.tmux.conf.local"
+tmux source-file ~/.tmux.conf
