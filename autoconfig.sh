@@ -39,7 +39,8 @@ else
 	echo "Oh-my-zsh installed already!"
 fi
 
-ensure_line "ZSH_THEME=\"" "ZSH_THEME=\"josh\"" "$HOME/.zshrc"
+# Deshabilito temporalmente el tema josh, porque buguea la terminal.
+# ensure_line "ZSH_THEME=\"" "ZSH_THEME=\"josh\"" "$HOME/.zshrc"
 ensure_line "^plugins" "plugins=(git fzf)" "$HOME/.zshrc"
 source $HOME/.zshrc
 
