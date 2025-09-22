@@ -13,6 +13,11 @@ ensure_line() {
 	local newline=$2
 	local file=$3
 
+    if [[ $# -ne 3 ]]; then
+        echo "Bad usage of ensure_line()";
+        exit 1;
+    fi
+
 	if [[ ! -f "$file" ]]; then
 		touch "$file"
 	else
@@ -34,7 +39,7 @@ else
 	echo "Oh-my-zsh installed already!"
 fi
 
-ensure_line "ZSH_THEME=\"robbyrussell\"" "ZSH_THEME=\"josh\"" "$HOME/.zshrc"
+ensure_line "ZSH_THEME=\"" "ZSH_THEME=\"josh\"" "$HOME/.zshrc"
 ensure_line "^plugins" "plugins=(git fzf)" "$HOME/.zshrc"
 source $HOME/.zshrc
 
@@ -52,6 +57,8 @@ else
 	echo "Oh-my-tmux installed already!"
 fi
 
-ensure_line "tmux_conf_copy_to_os_clipboard=false " "tmux_conf_copy_to_os_clipboard=true " "$HOME/.tmux.conf.local"
+ensure_line "tmux_conf_copy_to_os_clipboard=" "tmux_conf_copy_to_os_clipboard=true " "$HOME/.tmux.conf.local"
 ensure_line "mode-keys vi" "set -g mode-keys vi" "$HOME/.tmux.conf.local"
 tmux source-file ~/.tmux.conf
+ensure_line "bind -T copy-mode-vi H" "bind -T copy-mode-vi H send -X top-line" "$HOME/.tmux.conf"
+ensure_line "bind -T copy-mode-vi L" "bind -T copy-mode-vi L send -X bottom-line" "$HOME/.tmux.conf"
